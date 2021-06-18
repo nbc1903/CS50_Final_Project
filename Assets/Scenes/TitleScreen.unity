@@ -137,7 +137,7 @@ Transform:
   m_GameObject: {fileID: 44511599}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1273892056}
   - {fileID: 1477864595}
@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 84461665}
   - component: {fileID: 84461664}
   - component: {fileID: 84461666}
+  - component: {fileID: 84461667}
   m_Layer: 0
   m_Name: bakcground_night3
   m_TagString: Untagged
@@ -242,6 +243,25 @@ MonoBehaviour:
   parallaxEffect: 0
   camera_size_offset: 0.7
   cam: {fileID: 519420028}
+--- !u!95 &84461667
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84461663}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e952995314fe4ee44b4a61be86d8c5aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &463351149
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +770,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 516613378}
+  player: {fileID: 1520485490}
+  redSlime: {fileID: 7574984744498504377, guid: 2d1150d5375de634ead6dbdeb30f6de3,
+    type: 3}
+  blueSlime: {fileID: 4120671051463168183, guid: 242e62d3303e9e74bb811ad8a0e9699f,
+    type: 3}
+  greenSlime: {fileID: 7307351793185383200, guid: ecee390353c474b468661ed137e5f105,
+    type: 3}
   ground_lvl_0: {fileID: 3071575234942866479, guid: 5fd382fc226af9148922360702b8f35b,
     type: 3}
   ground_lvl_1: {fileID: 7944031289885019755, guid: 8846dbe0c94d413489ca25fd2c7a6ddc,
@@ -758,8 +785,47 @@ MonoBehaviour:
     type: 3}
   black_tile: {fileID: 1044753486658306739, guid: 064bb09379355494298a840a35425529,
     type: 3}
-  side_ground_lvl_0: {fileID: 0}
-  side_ground_lvl_1: {fileID: 0}
+  left_ground_lvl_0: {fileID: 7048718262663063909, guid: d6a6b79db8b9f564e83035ba5ec8ec49,
+    type: 3}
+  right_ground_lvl_0: {fileID: 4392157692761130267, guid: 97d327bc6a011954a9094802a4089661,
+    type: 3}
+  left_ground_lvl_1: {fileID: 8955011128182890910, guid: 12977fd159843ef4ba4ad6f834ab4f8e,
+    type: 3}
+  right_ground_lvl_1: {fileID: 820684399168351404, guid: e05ccd9849b0d8a46aaa9f20474dd639,
+    type: 3}
+  corner_right_up_lvl_0: {fileID: 323974564296266692, guid: 1e17e16353c7e764d8eef9d03d36d7f0,
+    type: 3}
+  corner_left_up_lvl_0: {fileID: 2332456758827731626, guid: 0f140bff6375403439a852ac2c1e267d,
+    type: 3}
+  corner_left_down_lvl_0: {fileID: 882828049192716135, guid: a24d62c706880c84da253531b9c0d84d,
+    type: 3}
+  corner_right_down_lvl_0: {fileID: 3141573271358537080, guid: 1a9b1c4da992da44699d05877b1da74a,
+    type: 3}
+  corner_left_lvl_1: {fileID: 1070322036800986496, guid: d0517c654ca8b574a8c7f000b4c42c8a,
+    type: 3}
+  corner_right_lvl_1: {fileID: 956299604318408161, guid: 1e85935c493e40d49b56e380c65d3253,
+    type: 3}
+  corner_down_left_lvl_1: {fileID: 3405213656042164812, guid: bea6f628a52edbd43b842fa9ccfb7ed4,
+    type: 3}
+  corner_left_down_lvl_1: {fileID: 1324516387903529759, guid: f1487a66ad79ea643a32db1ee732c529,
+    type: 3}
+  corner_right_down_lvl_1: {fileID: 8332889371846745818, guid: f3da98aaa36c73e4996987e8ce0f304b,
+    type: 3}
+  corner_down_right_lvl_1: {fileID: 6258121593031770943, guid: c2f2032373babf44a91fa8ce243af70f,
+    type: 3}
+  corner_up_left_lvl_1: {fileID: 7368239645323117516, guid: 6fe220a7eaf4b074d9a1e895b09b8d8a,
+    type: 3}
+  corner_up_right_lvl_1: {fileID: 2626446299363051868, guid: 5eee0cfff6669f04a908f08f2812a828,
+    type: 3}
+  roof_bush_0: {fileID: 878120957741776451, guid: 113fc96b996b30f479f2e942d0e24228,
+    type: 3}
+  roof_bush_1: {fileID: 8453676431564449675, guid: 5650cf6bee8bd3249bb5e1820490e9f7,
+    type: 3}
+  roof_bush_2: {fileID: 1545291487044025838, guid: f82c608438404794fa153faaaf7b2847,
+    type: 3}
+  roof_bush_3: {fileID: 7902298682230382214, guid: 4f1e836f2ddd3044890baf66748b3675,
+    type: 3}
+  spikes: {fileID: 176604389635152914, guid: e8b52b574bbadb24db254e89ed9497b9, type: 3}
 --- !u!1 &1457303168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1181,7 @@ PrefabInstance:
     - target: {fileID: 1705711326534084368, guid: c55151f336da5104287460fc71af6ff2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: 1705711326534084368, guid: c55151f336da5104287460fc71af6ff2,
         type: 3}

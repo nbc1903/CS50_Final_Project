@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class HuntressAnimationsController : MonoBehaviour
 {
     Animator animator;
     PlayerMovementController playerMovement;
-    HuntressStateController huntressState;
+    EventsController eventsController;
 
     private float delayToIdle = 0.0f;
     private float timeSinceAttack = 0.0f;
@@ -17,7 +18,14 @@ public class HuntressAnimationsController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovementController>();
-        huntressState = GetComponent<HuntressStateController>();
+        eventsController = GetComponent<EventsController>();
+
+        eventsController.OnPlayerDeath += OnPlayerDeath;
+        eventsController.OnPlayerAttack += OnPlayerAttack;
+        eventsController.OnPlayerJump += OnPlayerJump;
+        eventsController.OnPlayerMove += OnPlayerMove;
+        eventsController.OnPlayerIdle += OnPlayerIdle;
+
     }
 
     // Update is called once per frame
@@ -28,20 +36,21 @@ public class HuntressAnimationsController : MonoBehaviour
         animator.SetFloat("AirSpeedY", playerMovement.velocity_y);
         animator.SetBool("Grounded", playerMovement.grounded);
 
-        if (huntressState.hp <= 0)
-        {
-            if (!huntressState.dead)
-            {
-                animator.SetTrigger("Death");
-            }
-        }
-        else if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("j")) && timeSinceAttack > 0.5f)
-        {
+    }
 
+    private void OnPlayerDeath(object sender, EventArgs e)
+    {
+        animator.SetTrigger("Death");
+    }
+
+    void OnPlayerAttack(object sender, EventArgs e)
+    {
+        if(timeSinceAttack > 0.5f)
+        {
             currentAttack++;
             //playerMovement.attacking = true;
 
-            if (currentAttack > 3)
+            if (currentAttack > 2)
                 currentAttack = 1;
 
             if (timeSinceAttack > 1.0f)
@@ -52,22 +61,25 @@ public class HuntressAnimationsController : MonoBehaviour
             animator.SetTrigger("Attack" + currentAttack);
             timeSinceAttack = 0.0f;
         }
-        else if (Input.GetKeyDown("space") && playerMovement.grounded)
+    }
+
+    void OnPlayerJump(object sender, EventArgs e)
+    {
+        animator.SetTrigger("Jump");
+    }
+
+    void OnPlayerMove(object sender, EventArgs e)
+    {
+        delayToIdle = 0.05f;
+        animator.SetBool("Running", true);
+    }
+
+    void OnPlayerIdle(object sender, EventArgs e)
+    {
+        delayToIdle -= Time.deltaTime;
+        if (delayToIdle < 0)
         {
-            animator.SetTrigger("Jump");
-        }
-        else if (Mathf.Abs(playerMovement.inputX) > Mathf.Epsilon)
-        {
-            delayToIdle = 0.05f;
-            animator.SetBool("Running", true);
-        }
-        else
-        {
-            delayToIdle -= Time.deltaTime;
-            if (delayToIdle < 0)
-            {
-                animator.SetBool("Running", false);
-            }
+            animator.SetBool("Running", false);
         }
     }
 }

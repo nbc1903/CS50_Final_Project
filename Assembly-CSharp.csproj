@@ -64,10 +64,12 @@
     <Compile Include="Assets\HuntressSoundController.cs" />
     <Compile Include="Assets\HuntressStateController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\EventsController.cs" />
     <Compile Include="Assets\Scripts\HuntressAnimationsController.cs" />
     <Compile Include="Assets\Scripts\LevelGenerator.cs" />
     <Compile Include="Assets\Scripts\Parallax.cs" />
     <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
+    <Compile Include="Assets\SlimeController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Nicolas/Unity Projects/CS50/CS50 Final Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
