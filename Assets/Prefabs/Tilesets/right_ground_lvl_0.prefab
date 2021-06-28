@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5251990238385032708}
   m_Layer: 0
-  m_Name: right_side_tile
+  m_Name: right_ground_lvl_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,6 +10,7 @@ public class EventsController : MonoBehaviour
     public event EventHandler OnPlayerJump;
     public event EventHandler OnPlayerMove;
     public event EventHandler OnPlayerIdle;
+    public event EventHandler OnPlayerInteract;
 
     HuntressStateController huntressState;
     PlayerMovementController playerMovement;
@@ -34,6 +35,10 @@ public class EventsController : MonoBehaviour
         else if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("j"))
         {
             OnPlayerAttack?.Invoke(this, EventArgs.Empty);
+        }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            OnPlayerInteract?.Invoke(this, EventArgs.Empty);            
         }
         else if (Input.GetKeyDown("space") && playerMovement.grounded)
         {

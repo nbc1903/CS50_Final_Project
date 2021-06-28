@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 359335488848093999}
   - component: {fileID: 6077910850463860885}
   m_Layer: 0
-  m_Name: mainlevbuild_26
+  m_Name: black_tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

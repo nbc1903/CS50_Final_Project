@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7057543471202391676}
   - component: {fileID: 6953209083048372120}
   m_Layer: 0
-  m_Name: corner_right_down
+  m_Name: corner_right_down_lvl_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

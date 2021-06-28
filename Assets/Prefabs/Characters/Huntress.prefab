@@ -200,6 +200,8 @@ MonoBehaviour:
   maxSP: 10
   hp: 10
   sp: 0
+  invincibilityTime: 2
+  isInvincible: 0
   dead: 0
 --- !u!114 &1520485499
 MonoBehaviour:

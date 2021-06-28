@@ -9,6 +9,7 @@ public class SlimeController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator animator;
     BoxCollider2D boxCollider2d;
+    HuntressStateController playerState;
     public delegate void PlayerDetectedCallback();
     //HuntressStateController huntressState;
     LayerMask groundLayerMask;
@@ -27,6 +28,8 @@ public class SlimeController : MonoBehaviour
     public states state;
     public types type;
 
+    
+
     public enum states
     {
         onRoof,
@@ -44,10 +47,12 @@ public class SlimeController : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Huntress");
+        playerState = player.GetComponent<HuntressStateController>();
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         boxCollider2d = GetComponent<BoxCollider2D>();
+        
         groundLayerMask = LayerMask.GetMask("Ground");
         spriteRenderer.flipY = true;
         animationDefaultSpeed = animator.speed;
@@ -62,6 +67,7 @@ public class SlimeController : MonoBehaviour
     {
         xDistanceToPlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
         CheckIfGrounded();
+        
         switch (state)
         {
             case states.onRoof:
@@ -75,7 +81,7 @@ public class SlimeController : MonoBehaviour
                 break;
             default:
                 break;
-        }
+        }      
 
     }
 
@@ -113,7 +119,7 @@ public class SlimeController : MonoBehaviour
         bool isInRange = PlayerInRange(onPlayerDetect);
         setSlimeVel();
         attackTime += Time.deltaTime;
-        Debug.Log(attackTime);
+        //Debug.Log(attackTime);
 
         void playerDetected()
         {
@@ -238,5 +244,34 @@ public class SlimeController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 9)
+        {
+            Debug.Log("colliding with coll: " + collision.gameObject.name);
+        }
+    }
 
+    private void CheckIfHitTarget()
+    {
+        float extraHeight = 0.2f;
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, extraHeight, groundLayerMask);
+        Color rayColor;
+        if (raycastHit.collider != null)
+        {
+            rayColor = Color.green;
+            grounded = true;
+        }
+        else
+        {
+            rayColor = Color.red;
+            grounded = false;
+        }
+
+        Debug.DrawRay(boxCollider2d.bounds.center + new Vector3(boxCollider2d.bounds.extents.x, 0), Vector2.down * (boxCollider2d.bounds.extents.y + extraHeight), rayColor);
+        Debug.DrawRay(boxCollider2d.bounds.center - new Vector3(boxCollider2d.bounds.extents.x, 0), Vector2.down * (boxCollider2d.bounds.extents.y + extraHeight), rayColor);
+        Debug.DrawRay(boxCollider2d.bounds.center - new Vector3(boxCollider2d.bounds.extents.x, boxCollider2d.bounds.extents.y + extraHeight), Vector2.right * (boxCollider2d.bounds.size.x), rayColor);
+        //Debug.Log(raycastHit.collider);
+
+    }
 }

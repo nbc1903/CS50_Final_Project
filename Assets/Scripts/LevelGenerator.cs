@@ -74,8 +74,12 @@ public class LevelGenerator : MonoBehaviour
     const int ARRAY_TO_MAP_X_OFFSET = -28;
     const int ARRAY_TO_MAP_Y_OFFSET = -22;
 
-    const int MAP_WIDTH = 136;
+    const int MAP_WIDTH = 300;
     const int MAP_HEIGHT = 45;
+
+    const int INTRODUCTION_MAP_WIDTH = 60;
+    const int INTRODUCTION_MAP_HEIGHT = 25;
+    const int BOSS_MAP_WIDTH = 50;
 
     //---------------
     // PRIVATE DATA
@@ -188,7 +192,10 @@ public class LevelGenerator : MonoBehaviour
                         CreateChildPrefab(tiles[tileNum].transform.GetChild(ground_tile).gameObject, tilesParent, i + ARRAY_TO_MAP_X_OFFSET, j + ARRAY_TO_MAP_Y_OFFSET, -1, Quaternion.identity);
                         if (tileNum == (int)tileNames.ground_lvl_0 && Random.Range(0, 15) == 0)
                         {
-                            CreateChildPrefab(spikes.transform.GetChild(Random.Range(0, 4)).gameObject, tilesParent, i + ARRAY_TO_MAP_X_OFFSET, j + ARRAY_TO_MAP_Y_OFFSET, -1, Quaternion.identity);
+                            if (i > INTRODUCTION_MAP_WIDTH)
+                            {
+                                CreateChildPrefab(spikes.transform.GetChild(Random.Range(0, 4)).gameObject, tilesParent, i + ARRAY_TO_MAP_X_OFFSET, j + ARRAY_TO_MAP_Y_OFFSET, -1, Quaternion.identity);
+                            }
                         }
                     }
                     else if (tileNum == (int)tileNames.right_ground_lvl_0 || tileNum == (int)tileNames.left_ground_lvl_0 || tileNum == (int)tileNames.right_ground_lvl_1 || tileNum == (int)tileNames.left_ground_lvl_1)
@@ -262,12 +269,24 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < MAP_WIDTH; i++)
         {
             //first column
+            /*
             if (i == 0)
             {
 
                 x_platform_distance = Random.Range(MIN_PLATFORM_WIDTH, MAX_PLATFORM_WIDTH);
                 prev_y_platform_distance = y_platform_distance;
                 y_platform_distance = Random.Range(MIN_Y_TILE_MAP, MAX_Y_TILE_MAP);
+                player_init_y = y_platform_distance;
+                createPlatformCollider(x_platform_distance, y_platform_distance, x_init_platform);
+                up_start_platform = true;
+            }
+            */
+            if (i == 0)
+            {
+
+                x_platform_distance = INTRODUCTION_MAP_WIDTH;
+                prev_y_platform_distance = y_platform_distance;
+                y_platform_distance = INTRODUCTION_MAP_HEIGHT;
                 player_init_y = y_platform_distance;
                 createPlatformCollider(x_platform_distance, y_platform_distance, x_init_platform);
                 up_start_platform = true;
@@ -338,9 +357,9 @@ public class LevelGenerator : MonoBehaviour
                 {
                     tiles_since_bush = 0;
                     roof_x_init = i;
-                    if(Random.Range(0,2) == 0)
+                    if(i > INTRODUCTION_MAP_WIDTH && Random.Range(0,2) == 0)
                     {
-                        roof_bush_slimes_x.Add(i+1.5f);
+                        roof_bush_slimes_x.Add(i + 1.5f);
                     }
                 }
                 else
@@ -348,7 +367,7 @@ public class LevelGenerator : MonoBehaviour
                     tiles_since_bush++;
                     if(tiles_since_bush >= 6)
                     {
-                        if (Random.Range(0, 2) == 0)
+                        if (i > INTRODUCTION_MAP_WIDTH && Random.Range(0, 2) == 0)
                         {
                             roof_slimes_x.Add(i);
                         }

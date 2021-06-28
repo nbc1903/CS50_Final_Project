@@ -326,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3744287287332438846}
   m_Layer: 0
-  m_Name: left_side_tile
+  m_Name: left_ground_lvl_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
